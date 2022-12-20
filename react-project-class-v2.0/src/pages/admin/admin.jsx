@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Route, Routes, useNavigate,Navigate } from "react-router-dom";
 import { Layout } from 'antd';
-import { Route, Routes } from 'react-router-dom';
 import Header from '../../components/header/header';
 import Leftnav from '../../components/LeftNav/leftnav';
 import Home from '../home/home';
@@ -11,13 +11,24 @@ import User from '../user/user';
 import Bar from '../charts/bar';
 import Line from '../charts/line';
 import Pie from '../charts/pie';
+import storageUtils from '../../storageUtils';
 const { Footer, Sider, Content } = Layout;
 
 
-export default class Admin extends Component {
+
+export const withNavigation = (Component) => {
+  return (props) => <Component {...props} navigate={useNavigate()} />;
+};
+
+class Admin extends Component {
   render() {
+    //判断是否可以到这个页面
+    const user=storageUtils.getUser()
+    if(!user._id){
+      return <Navigate to='/login'/>
+    }
     return (
-      <div>
+    <div>
     <Layout>
       <Sider  style={{
         overflow: 'auto',
@@ -58,3 +69,4 @@ export default class Admin extends Component {
     )
   }
 }
+export default withNavigation(Admin);
