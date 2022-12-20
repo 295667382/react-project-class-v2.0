@@ -11,7 +11,7 @@ export const withNavigation = (Component) => {
 
 class Leftnav extends Component {
     state={
-        collapsed:true
+        /* collapsed:true */
     }
     //点击触发
     handleClick=({ item, key, keyPath, domEvent })=>{
@@ -23,7 +23,7 @@ class Leftnav extends Component {
     this.props.navigate(key)
     }
     render() {
-        const {collapsed}=this.state
+       
     return (
       <div className='left-nav'>
         <div className='left-nav-header'>
@@ -35,7 +35,7 @@ class Leftnav extends Component {
         defaultOpenKeys={['sub1']}
         mode="inline"
         theme="dark"
-        inlineCollapsed={collapsed}
+       
         items={menuList}
         onClick={this.handleClick}
       />
